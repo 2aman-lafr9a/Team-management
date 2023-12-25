@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package PlayerManagement;
+
+service PlayerManagementService {
+    rpc GetPlayer(GetPlayerRequest) returns (GetPlayerResponse) {}
+    rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse) {}
+    rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerResponse) {}
+    rpc DeletePlayer(DeletePlayerRequest) returns (DeletePlayerResponse) {}
+    rpc GetPlayers(GetPlayersRequest) returns (GetPlayersResponse) {}
+}
+
+message GetPlayerRequest {
+    string id = 1;
+}
+
+message GetPlayerResponse {
+    Player player = 1;
+}
+
+message CreatePlayerRequest {
+    Player player = 1;
+}
+
+message CreatePlayerResponse {
+    Player player = 1;
+}
+
+message UpdatePlayerRequest {
+    Player player = 1;
+}
+
+message UpdatePlayerResponse {
+    Player player = 1;
+}
+
+message DeletePlayerRequest {
+    string id = 1;
+}
+
+message DeletePlayerResponse {
+    string id = 1;
+}
+
+message GetPlayersRequest {
+    string team_id = 1;
+}
+
+message GetPlayersResponse {
+    repeated Player players = 1;
+}
+
+message Player {
+    string id = 1;
+    string name = 2;
+    string age = 3;
+    string photo = 4;
+    string nationality = 5;
+    string flag = 6;
+    int32 overall = 7;
+    int32 potential = 8;
+    string position = 9;
+    int32 value = 10;
+    int32 wage = 11;
+    string preferred_foot = 12;
+    string work_rate = 13;
+    string body_type = 14;
+    string international_reputation = 15;
+    string skill_moves = 16;
+    string weak_foot = 17;
+    int32 height = 18;
+    int32 weight = 19;
+}

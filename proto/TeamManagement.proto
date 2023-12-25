@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package Team_Management;
+
+service TeamManagement {
+    rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse) {}
+    rpc GetTeam(GetTeamRequest) returns (GetTeamResponse) {}
+    rpc UpdateTeam(UpdateTeamRequest) returns (UpdateTeamResponse) {}
+    rpc DeleteTeam(DeleteTeamRequest) returns (DeleteTeamResponse) {}
+    rpc GetTeams(GetTeamsRequest) returns (GetTeamsResponse) {}
+}
+
+message CreateTeamRequest {
+    string name = 1;
+    string description = 2;
+    string owner = 3;
+}
+
+message CreateTeamResponse {
+    string id = 1;
+}
+
+message GetTeamRequest {
+    string id = 1;
+}
+
+message GetTeamResponse {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string owner = 4;
+}
+
+message UpdateTeamRequest {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string owner = 4;
+}
+
+message UpdateTeamResponse {
+    string id = 1;
+}
+
+message DeleteTeamRequest {
+    string id = 1;
+}
+
+message DeleteTeamResponse {
+    string id = 1;
+}
+
+message GetTeamsRequest {
+    string owner = 1;
+}
+
+message GetTeamsResponse {
+    repeated Team teams = 1;
+}
+
+message Team {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string owner = 4;
+}
