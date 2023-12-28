@@ -9,7 +9,9 @@ class TeamManagementService < TeamManagement::TeamManagement::Service
     team_name = create_team_request.name
     team_description = create_team_request.description
     team_owner = create_team_request.owner
-    team = Team.create(name: team_name, description: team_description, owner: team_owner)
+    team_logo = create_team_request.team_logo
+    players_id = create_team_request.players_id
+    team = Team.create(name: team_name, description: team_description, owner: team_owner, team_logo: team_logo, players_id: players_id)
     team = team_to_proto(team)
     TeamManagement::CreateTeamResponse.new(id: team.id)
   end

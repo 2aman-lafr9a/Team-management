@@ -14,6 +14,8 @@ message CreateTeamRequest {
     string name = 1;
     string description = 2;
     string owner = 3;
+    string team_logo = 4;
+    repeated string players_id= 5;
 }
 
 message CreateTeamResponse {
