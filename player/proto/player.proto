@@ -1,8 +1,12 @@
 syntax = "proto3";
 
-package PlayerManagement;
 
-service PlayerManagementService {
+package player;
+
+//option java_outer_classname = "PlayerOuterClass";
+option java_package = "org.example.apigateway.grpc.player";
+
+service Player{
     rpc GetPlayer(GetPlayerRequest) returns (GetPlayerResponse) {}
     rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse) {}
     rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerResponse) {}
@@ -15,23 +19,23 @@ message GetPlayerRequest {
 }
 
 message GetPlayerResponse {
-    Player player = 1;
+    PlayerItem player = 1;
 }
 
 message CreatePlayerRequest {
-    Player player = 1;
+    PlayerItem player = 1;
 }
 
 message CreatePlayerResponse {
-    Player player = 1;
+    PlayerItem player = 1;
 }
 
 message UpdatePlayerRequest {
-    Player player = 1;
+    PlayerItem player = 1;
 }
 
 message UpdatePlayerResponse {
-    Player player = 1;
+    PlayerItem player = 1;
 }
 
 message DeletePlayerRequest {
@@ -47,10 +51,10 @@ message GetPlayersRequest {
 }
 
 message GetPlayersResponse {
-    repeated Player players = 1;
+    repeated PlayerItem players = 1;
 }
 
-message Player {
+message PlayerItem {
     string id = 1;
     string name = 2;
     string age = 3;
