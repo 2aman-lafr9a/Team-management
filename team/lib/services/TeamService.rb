@@ -2,7 +2,6 @@
 
 require "grpc"
 require_relative "../models/team"
-require_relative "../models/player"
 
 class TeamManagementService < TeamManagement::TeamManagement::Service
   def create_team(create_team_request, _unused_call)
@@ -11,7 +10,8 @@ class TeamManagementService < TeamManagement::TeamManagement::Service
     team_owner = create_team_request.owner
     team_logo = create_team_request.team_logo
     players_id = create_team_request.players_id
-    team = Team.create(name: team_name, description: team_description, owner: team_owner, team_logo: team_logo, players_id: players_id)
+    team = Team.create(name: team_name, description: team_description, owner: team_owner, team_logo: team_logo, 
+                       players_id: players_id)
     team = team_to_proto(team)
     TeamManagement::CreateTeamResponse.new(id: team.id)
   end
@@ -30,7 +30,8 @@ class TeamManagementService < TeamManagement::TeamManagement::Service
     if team.nil?
       return TeamManagement::UpdateTeamResponse.new(id: "Team not found")
     end
-    team.update(name: update_team_request.name, description: update_team_request.description, owner: update_team_request.owner)
+    team.update(name: update_team_request.name, description: update_team_request.description, 
+                owner: update_team_request.owner)
     TeamManagement::UpdateTeamResponse.new(id: team.id.to_s)
   end
 

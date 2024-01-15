@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "active_record"
+require 'active_record'
 
-class Player < ActiveRecord::Base
+class PlayerModel < ActiveRecord::Base
   validates :name, presence: true
   validates :age, presence: true
   validates :photo, presence: true
