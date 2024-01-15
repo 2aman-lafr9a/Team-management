@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  mysql_db:
+    image: mysql:8.2.0
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: team_management
+      MYSQL_USER: team_management
+      MYSQL_ROOT_PASSWORD: team_management
+      MYSQL_PASSWORD: team_management
+    volumes:
+      - team_database:/var/lib/mysql
+    restart: always
+
+  team_management_app:
+    build:
+      context: .
+    volumes:
+      - .:/opt/app
+    ports:
+      - '50051:50051'
+    env_file:
+      - .env
+
+
+volumes:
+  team_database:

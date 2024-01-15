@@ -1,0 +1,16 @@
+.git
+.dockerignore
+.env
+node_modules/
+vendor/bundle/
+tmp/
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.github
+.gitignore
