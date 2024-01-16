@@ -8,6 +8,15 @@ WORKDIR /app
 # Copy the application code into the container
 COPY . .
 
+# Enter the player directory
+WORKDIR /app/player
+
+# Install dependencies
+RUN bundle install
+
+# Enter the team directory
+WORKDIR /app/team
+
 # Install dependencies
 RUN bundle install
 

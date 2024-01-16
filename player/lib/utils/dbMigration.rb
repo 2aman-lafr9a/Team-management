@@ -12,7 +12,7 @@ ActiveRecord::Base.establish_connection(
 
 class Create < ActiveRecord::Migration[6.0]
   def change
-    create_table :players do |t|
+    create_table :player_model do |t|
       t.string :name
       t.integer :age
       t.string :photo
@@ -21,7 +21,6 @@ class Create < ActiveRecord::Migration[6.0]
       t.integer :overall
       t.integer :potential
       t.string :position
-      t.integer :team_id
       t.integer :value
       t.integer :wage
       t.string :preferred_foot
@@ -33,5 +32,11 @@ class Create < ActiveRecord::Migration[6.0]
       t.string :height
       t.string :weight
     end
+  end
+end
+
+class AddTeamIdToPlayer < ActiveRecord::Migration[6.0]
+  def change
+    add_column :player_model, :team_id, :integer
   end
 end

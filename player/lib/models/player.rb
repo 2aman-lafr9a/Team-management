@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require 'active_record'
+require_relative '../utils/dbMigration'
 
 class PlayerModel < ActiveRecord::Base
+  self.table_name = 'player_model'
   validates :name, presence: true
   validates :age, presence: true
   validates :photo, presence: true
@@ -22,5 +23,5 @@ class PlayerModel < ActiveRecord::Base
   validates :height, presence: true
   validates :weight, presence: true
 
-  belongs_to :team
+  belongs_to :team_model
 end

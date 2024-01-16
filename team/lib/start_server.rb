@@ -1,22 +1,22 @@
 # frozen_string_literal: true
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
 require "grpc"
-require_relative "TeamManagement_services_pb"
-require_relative "PlayerManagement_services_pb"
+require_relative "team_services_pb"
 require "rubygems"
-require_relative "services/TeamManagementService"
-require_relative "services/PlayerManagementService"
+require_relative "services/TeamService"
+require_relative "utils/dbMigration"
 
-class TeamManagementServer
+class TeamServer
   class << self
     def start
+      Create.migrate(:up) unless ActiveRecord::Base.connection.table_exists?(:team_model)
+      AddPlayersIdToTeam.migrate(:up) unless ActiveRecord::Base.connection.column_exists?(:team_model, :players_id)
       @server = GRPC::RpcServer.new
-      @server.add_http2_port("localhost:50051", :this_port_is_insecure)
-      @server.handle(TeamManagementService)
-      @server.handle(PlayerManagementService)
+      @server.add_http2_port("localhost:50003", :this_port_is_insecure)
+      @server.handle(TeamService)
       @server.run_till_terminated
     end
   end
 end
 
-TeamManagementServer.start
+TeamServer.start

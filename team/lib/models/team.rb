@@ -2,11 +2,12 @@
 
 require_relative "../utils/dbMigration"
 
-class Team < ActiveRecord::Base
+class TeamModel < ActiveRecord::Base
+  self.table_name = "team_model"
   validates :name, presence: true
   validates :description, presence: true
   validates :owner, presence: true
   validates :team_logo, presence: true
-  has_many :players
+  validates :players_id, presence: true
 end
 
