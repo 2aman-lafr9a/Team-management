@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "grpc"
-require_relative "../models/team"
+require_relative "../models/team_model"
 require_relative "../team_services_pb"
 
 class TeamService < Team::Team::Service
@@ -16,7 +16,7 @@ class TeamService < Team::Team::Service
     end
     @team = TeamModel.new(name: team_name, description: team_description, owner: team_owner, team_logo: team_logo,
                           players_id: players_id)
-    if @team.save!
+    if @team.save
       Team::CreateTeamResponse.new(id: @team.id.to_s)
     else
       Team::CreateTeamResponse.new(id: "Team not created")
@@ -24,12 +24,12 @@ class TeamService < Team::Team::Service
   end
 
   def get_team(get_team_request, _unused_call)
-    @team = TeamModel.find(param[:get_team_request.id])
+    @team = TeamModel.find(get_team_request.id)
     if @team.nil?
       return Team::GetTeamResponse.new(id: "Team not found")
     end
     Team::GetTeamResponse.new(id: @team.id.to_s, name: @team.name, description: @team.description,
-                              owner: @team.owner, team_logo: @team.team_logo, players_id: @team.players_id)
+                              owner: @team.owner)
   end
 
   def update_team(update_team_request, _unused_call)
@@ -40,8 +40,6 @@ class TeamService < Team::Team::Service
     team.name = update_team_request.name
     team.description = update_team_request.description
     team.owner = update_team_request.owner
-    team.team_logo = update_team_request.team_logo
-    team.players_id = update_team_request.players_id
     team.save
     Team::UpdateTeamResponse.new(id: team.id.to_s)
   end
@@ -63,6 +61,9 @@ class TeamService < Team::Team::Service
   private
 
   def team_to_proto(team)
-    Team::TeamModel.new(id: team.id.to_s, name: team.name, description: team.description, owner: team.owner)
+    Team::TeamItem.new(id: team.id.to_s,
+                        name: team.name,
+                        description: team.description,
+                        owner: team.owner)
   end
 end

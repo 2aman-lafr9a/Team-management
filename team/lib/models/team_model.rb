@@ -8,6 +8,6 @@ class TeamModel < ActiveRecord::Base
   validates :description, presence: true
   validates :owner, presence: true
   validates :team_logo, presence: true
-  validates :players_id, presence: true
+  has_many :player_model
 end
 
