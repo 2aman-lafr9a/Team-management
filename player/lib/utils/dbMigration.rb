@@ -4,10 +4,10 @@ require 'active_record'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'mysql2',
-  host: 'localhost',
-  username: 'root',
-  password: 'password',
-  database: 'TeamManagement'
+  host: ENV['DB_HOST'] || 'localhost',
+  username: ENV['DB_USERNAME'] || 'root',
+  password: ENV['DB_PASSWORD'] || 'password',
+  database: ENV['team_management'] || 'TeamManagement'
 )
 
 class Create < ActiveRecord::Migration[6.0]

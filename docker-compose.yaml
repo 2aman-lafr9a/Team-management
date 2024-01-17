@@ -14,17 +14,31 @@ services:
     volumes:
       - team_database:/var/lib/mysql
     restart: always
-
-  team_management_app:
+  team_management:
     build:
-      context: .
+      context: ./team
     volumes:
       - .:/opt/app
     ports:
-      - '50051:50051'
-    env_file:
-      - .env
-
-
-volumes:
-  team_database:
+      - '50003:50003'
+    restart: always
+    depends_on:
+      - mysql_db
+    environment:
+      DB_HOST: mysql_db
+      DB_USERNAME: team_management
+      DB_PASSWORD: team_management
+  player_management:
+    build:
+      context: ./player
+    volumes:
+      - .:/opt/app
+    ports:
+      - '50004:50004'
+    restart: always
+    depends_on:
+      - mysql_db
+    environment:
+      DB_HOST: mysql_db
+      DB_USERNAME: team_management
+      DB_PASSWORD: team_management
