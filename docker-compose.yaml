@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-  mysql_db:
-    image: mysql:8.2.0
-    container_name: mysql
+  mysql_team_management:
+    image: mysql
+    container_name: mysql_team_management
     ports:
       - "3307:3306"
     environment:
@@ -23,9 +23,9 @@ services:
       - '50003:50003'
     restart: always
     depends_on:
-      - mysql_db
+      - mysql_team_management
     environment:
-      DB_HOST: mysql_db
+      DB_HOST: mysql_team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
   player_management:
@@ -37,8 +37,8 @@ services:
       - '50004:50004'
     restart: always
     depends_on:
-      - mysql_db
+      - mysql_team_management
     environment:
-      DB_HOST: mysql_db
+      DB_HOST: mysql_team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
