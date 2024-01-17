@@ -12,7 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD: team_management
       MYSQL_PASSWORD: team_management
     volumes:
-      - team_database:/var/lib/mysql
+      - /var/lib/mysql
     restart: always
   team_management:
     build:
