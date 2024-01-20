@@ -34,7 +34,21 @@ services:
     volumes:
       - .:/opt/app
     ports:
-      - '50004:50004'
+      - '50005:50005'
+    restart: always
+    depends_on:
+      - mysql_team_management
+    environment:
+      DB_HOST: mysql_team_management
+      DB_USERNAME: team_management
+      DB_PASSWORD: team_management
+  teamManager_management:
+    build:
+      context: ./teamManager
+    volumes:
+      - .:/opt/app
+    ports:
+      - '50007:50007'
     restart: always
     depends_on:
       - mysql_team_management

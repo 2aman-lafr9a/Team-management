@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+
+package teamManager;
+
+//option java_outer_classname = "PlayerOuterClass";
+option java_package = "org.example.apigateway.grpc.teamManager";
+
+service TeamManager {
+    rpc GetTeamManager (GetTeamManagerRequest) returns (GetTeamManagerResponse) {}
+    rpc GetTeamManagers (GetTeamManagersRequest) returns (GetTeamManagersResponse) {}
+    rpc CreateTeamManager (CreateTeamManagerRequest) returns (CreateTeamManagerResponse) {}
+    rpc UpdateTeamManager (UpdateTeamManagerRequest) returns (UpdateTeamManagerResponse) {}
+    rpc DeleteTeamManager (DeleteTeamManagerRequest) returns (DeleteTeamManagerResponse) {}
+}
+
+message GetTeamManagerRequest {
+    int32 id = 1;
+}
+
+message GetTeamManagerResponse {
+    TeamManagerItem teamManager = 1;
+}
+
+message GetTeamManagersRequest {
+    int32 page = 1;
+    int32 size = 2;
+}
+
+message GetTeamManagersResponse {
+    repeated TeamManagerItem teamManagers = 1;
+    int32 total = 2;
+}
+
+message CreateTeamManagerRequest {
+    string name = 1;
+    string surname = 2;
+    string age = 3;
+    string teamId = 4;
+}
+
+message CreateTeamManagerResponse {
+    TeamManagerItem teamManager = 1;
+}
+
+message UpdateTeamManagerRequest {
+    int32 id = 1;
+    string name = 2;
+    string surname = 3;
+    string age = 4;
+    string teamId = 5;
+}
+
+message UpdateTeamManagerResponse {
+    TeamManagerItem teamManager = 1;
+}
+
+message DeleteTeamManagerRequest {
+    int32 id = 1;
+}
+
+message DeleteTeamManagerResponse {
+    bool success = 1;
+}
+
+message TeamManagerItem {
+    int32 id = 1;
+    string name = 2;
+    string surname = 3;
+    int32 age = 4;
+    string teamId = 5;
+}
