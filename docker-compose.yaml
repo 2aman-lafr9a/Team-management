@@ -44,9 +44,9 @@ services:
       DB_NAME: team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
-  teamManager_management:
+  team_manager:
     build:
-      context: ./teamManager
+      context: ./team_manager
     volumes:
       - .:/opt/app
     ports:
