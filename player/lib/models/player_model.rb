@@ -6,9 +6,9 @@ class PlayerModel < ActiveRecord::Base
   self.table_name = 'player_model'
   validates :name, presence: true
   validates :age, presence: true
-  validates :photo, presence: true
+  validates :photo, presence: false
   validates :nationality, presence: true
-  validates :flag, presence: true
+  validates :flag, presence: false
   validates :overall, presence: true
   validates :potential, presence: true
   validates :position, presence: true
