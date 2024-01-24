@@ -26,6 +26,7 @@ services:
       - mysql_team_management
     environment:
       DB_HOST: mysql_team_management
+      DB_NAME: team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
   player_management:
@@ -40,11 +41,12 @@ services:
       - mysql_team_management
     environment:
       DB_HOST: mysql_team_management
+      DB_NAME: team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
-  teamManager_management:
+  team_manager:
     build:
-      context: ./teamManager
+      context: ./team_manager
     volumes:
       - .:/opt/app
     ports:
@@ -53,6 +55,7 @@ services:
     depends_on:
       - mysql_team_management
     environment:
+      DB_NAME: team_management
       DB_HOST: mysql_team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
