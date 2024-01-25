@@ -12,13 +12,11 @@ services:
       MYSQL_ROOT_PASSWORD: team_management
       MYSQL_PASSWORD: team_management
     volumes:
-      - /var/lib/mysql
+      - team_management_volume:/var/lib/mysql
     restart: always
   team_management:
     build:
       context: ./team
-    volumes:
-      - .:/opt/app
     ports:
       - '50003:50003'
     restart: always
@@ -32,8 +30,6 @@ services:
   player_management:
     build:
       context: ./player
-    volumes:
-      - .:/opt/app
     ports:
       - '50005:50005'
     restart: always
@@ -59,3 +55,5 @@ services:
       DB_HOST: mysql_team_management
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
+volumes:
+  team_management_volume:
