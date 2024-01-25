@@ -98,8 +98,10 @@ class PlayerService < Player::Player::Service
 
   def get_players(get_players_request, _unused_call)
     @players = PlayerModel.where(team_id: get_players_request.team_id)
-    return Player::GetPlayersResponse.new(id: 'Players not found') if @players.nil?
-
+    limit = get_players_request.limit
+    page = get_players_request.page
+    @players = @players.limit(limit) if limit.positive?
+    @players = @players.offset(page * limit) if page.positive?
     Player::GetPlayersResponse.new(players: @players.map { |player| player_to_proto(player) })
   end
 

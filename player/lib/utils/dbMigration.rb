@@ -8,7 +8,8 @@ ActiveRecord::Base.establish_connection(
   host: ENV['DB_HOST'] || 'localhost',
   username: ENV['DB_USERNAME'] || 'root',
   password: ENV['DB_PASSWORD'] || 'password',
-  database: ENV['DB_NAME'] || 'team_management'
+  database: ENV['DB_NAME'] || 'team_management',
+  pool: 20
 )
 
 class Create < ActiveRecord::Migration[6.0]
@@ -45,6 +46,8 @@ end
 class FillDatabase < ActiveRecord::Migration[6.0]
   def up
     CSV.foreach(File.join(File.dirname(__FILE__),'FIFA23_official_data.csv'), headers: true) do |row|
+      team = TeamModel.find_by(name: row['Club'])
+      team_id = team ? team.id : 0
       player = PlayerModel.create(
         name: row['Name'],
         age: row['Age'],
@@ -63,7 +66,8 @@ class FillDatabase < ActiveRecord::Migration[6.0]
         position: row['Position'],
         value: row['Value'],
         wage: row['Wage'],
-        work_rate: row['Work Rate']
+        work_rate: row['Work Rate'],
+        team_id: team_id
       )
       if player.save
         puts "Player #{player.name} saved"

@@ -53,7 +53,6 @@ message DeleteTeamResponse {
 }
 
 message GetTeamsRequest {
-    string owner = 1;
 }
 
 message GetTeamsResponse {

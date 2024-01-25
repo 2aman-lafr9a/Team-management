@@ -25,3 +25,12 @@ class PlayerModel < ActiveRecord::Base
 
   belongs_to :team_model
 end
+
+class TeamModel < ActiveRecord::Base
+  self.table_name = "team_model"
+  validates :name, presence: true
+  validates :description, presence: false
+  validates :owner, presence: false
+  validates :team_logo, presence: true
+  has_many :player_model
+end

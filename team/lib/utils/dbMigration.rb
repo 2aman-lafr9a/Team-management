@@ -32,14 +32,19 @@ end
 
 class FillDatabase < ActiveRecord::Migration[6.0]
   def up
-    CSV.foreach(File.join(File.dirname(__FILE__),"FIFA23_official_data.csv"), headers: true) do |row|
+    CSV.foreach(File.join(File.dirname(__FILE__), "FIFA23_official_data.csv"), headers: true) do |row|
       if (team = TeamModel.find_by(name: row["Club"]))
         puts "Team #{team.name} already exists"
         next
       end
       team = TeamModel.create(
         name: row["Club"],
-        team_logo: row["Club Logo"]
+        team_logo: row["Club Logo"],
+      )
+      player = PlayerModel.find_by(team_id: team.id)
+      player_id = player ? player.id : 0
+      team.update(
+        players_id: player_id
       )
       if team.save
         team = TeamModel.last
@@ -49,6 +54,7 @@ class FillDatabase < ActiveRecord::Migration[6.0]
       end
     end
   end
+
   def down
     TeamModel.delete_all
   end
