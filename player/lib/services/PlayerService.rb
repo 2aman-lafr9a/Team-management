@@ -97,7 +97,11 @@ class PlayerService < Player::Player::Service
   end
 
   def get_players(get_players_request, _unused_call)
-    @players = PlayerModel.where(team_id: get_players_request.team_id)
+    if get_players_request.team_id != ""
+      @players = PlayerModel.where(team_id: get_players_request.team_id)
+    else
+      @players = PlayerModel.all
+    end
     limit = get_players_request.limit
     page = get_players_request.page
     @players = @players.limit(limit) if limit.positive?

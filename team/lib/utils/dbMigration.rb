@@ -26,7 +26,7 @@ end
 
 class AddPlayersIdToTeam < ActiveRecord::Migration[6.0]
   def change
-    add_column :team_model, :players_id, :integer
+    add_column :team_model, :players_id, :integer, array: true, default: []
   end
 end
 
@@ -39,21 +39,18 @@ class FillDatabase < ActiveRecord::Migration[6.0]
       end
       team = TeamModel.create(
         name: row["Club"],
-        team_logo: row["Club Logo"],
+        team_logo: row["Club Logo"]
       )
-      player = PlayerModel.find_by(team_id: team.id)
-      player_id = player ? player.id : 0
-      team.update(
-        players_id: player_id
-      )
+      players_id = []
+      team.update(players_id: players_id.push(row["ID"])) if team.name == row["Club"]
       if team.save
         team = TeamModel.last
         puts "Team #{team.name} created"
       else
         puts "Team #{team.name} not created"
       end
+                                                            end
     end
-  end
 
   def down
     TeamModel.delete_all
