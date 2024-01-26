@@ -16,6 +16,7 @@ class Create < ActiveRecord::Migration[6.0]
       t.string :name
       t.integer :age
       t.string :surname
+      t.string :wallet
     end
   end
 end

@@ -3,6 +3,8 @@ syntax = "proto3";
 
 package player;
 
+import "offer.proto";
+
 //option java_outer_classname = "PlayerOuterClass";
 option java_package = "org.example.apigateway.grpc.player";
 
@@ -12,6 +14,7 @@ service Player{
     rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerResponse) {}
     rpc DeletePlayer(DeletePlayerRequest) returns (DeletePlayerResponse) {}
     rpc GetPlayers(GetPlayersRequest) returns (GetPlayersResponse) {}
+    rpc GetOffersByPlayer(GetOffersByPlayerRequest) returns (GetOffersByPlayerResponse) {}
 }
 
 message GetPlayerRequest {
@@ -56,6 +59,14 @@ message GetPlayersResponse {
     repeated PlayerItem players = 1;
 }
 
+message GetOffersByPlayerRequest {
+    string player_id = 1;
+}
+
+message GetOffersByPlayerResponse {
+    repeated offer.OfferItem offers = 1;
+}
+
 message PlayerItem {
     string id = 1;
     string name = 2;
@@ -76,4 +87,5 @@ message PlayerItem {
     string weak_foot = 17;
     int32 height = 18;
     int32 weight = 19;
+    string offer = 20;
 }

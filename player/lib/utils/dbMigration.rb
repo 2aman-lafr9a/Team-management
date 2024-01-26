@@ -33,6 +33,7 @@ class Create < ActiveRecord::Migration[6.0]
       t.string :body_type
       t.string :height
       t.string :weight
+      t.string :offer
     end
   end
 end

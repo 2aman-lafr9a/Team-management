@@ -37,6 +37,7 @@ message CreateTeamManagerRequest {
     string surname = 2;
     string age = 3;
     string teamId = 4;
+    string wallet = 5;
 }
 
 message CreateTeamManagerResponse {
@@ -49,6 +50,7 @@ message UpdateTeamManagerRequest {
     string surname = 3;
     string age = 4;
     string teamId = 5;
+    string wallet = 6;
 }
 
 message UpdateTeamManagerResponse {
@@ -69,4 +71,5 @@ message TeamManagerItem {
     string surname = 3;
     int32 age = 4;
     string teamId = 5;
+    string wallet = 6;
 }

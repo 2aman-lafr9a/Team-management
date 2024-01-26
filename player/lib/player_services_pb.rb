@@ -19,6 +19,7 @@ module Player
       rpc :UpdatePlayer, ::Player::UpdatePlayerRequest, ::Player::UpdatePlayerResponse
       rpc :DeletePlayer, ::Player::DeletePlayerRequest, ::Player::DeletePlayerResponse
       rpc :GetPlayers, ::Player::GetPlayersRequest, ::Player::GetPlayersResponse
+      rpc :GetOffersByPlayer, ::Player::GetOffersByPlayerRequest, ::Player::GetOffersByPlayerResponse
     end
 
     Stub = Service.rpc_stub_class

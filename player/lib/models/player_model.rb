@@ -22,6 +22,7 @@ class PlayerModel < ActiveRecord::Base
   validates :body_type, presence: true
   validates :height, presence: true
   validates :weight, presence: true
+  validates :offer, presence: false
 
   belongs_to :team_model
 end
