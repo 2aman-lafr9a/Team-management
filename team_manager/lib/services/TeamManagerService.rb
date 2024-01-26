@@ -11,6 +11,7 @@ class TeamManagerService < TeamManager::TeamManager::Service
     teamManager.name = create_teamManager_request.name
     teamManager.age = create_teamManager_request.age
     teamManager.surname = create_teamManager_request.surname
+    teamManager.wallet = create_teamManager_request.wallet
     teamManager.save
     TeamManager::CreateTeamManagerResponse.new(id: teamManager.id.to_s)
   end
@@ -22,7 +23,8 @@ class TeamManagerService < TeamManager::TeamManager::Service
     TeamManager::GetTeamManagerResponse.new(id: teamManager.id.to_s,
                                             name: teamManager.name,
                                             age: teamManager.age.to_s,
-                                            surname: teamManager.surname)
+                                            surname: teamManager.surname,
+                                            wallet: teamManager.wallet)
   end
 
   def update_TeamManager(update_teamManager_request, _unused_call)
@@ -32,6 +34,7 @@ class TeamManagerService < TeamManager::TeamManager::Service
     teamManager.name = update_teamManager_request.name
     teamManager.age = update_teamManager_request.age
     teamManager.surname = update_teamManager_request.surname
+    teamManager.wallet = update_teamManager_request.wallet
     teamManager.save
     TeamManager::UpdateTeamManagerResponse.new(id: teamManager.id.to_s)
   end
@@ -55,7 +58,8 @@ class TeamManagerService < TeamManager::TeamManager::Service
     TeamManager::GetTeamManagersResponse.new(id: teamManager.id.to_s,
                                              name: teamManager.name,
                                              age: teamManager.age.to_s,
-                                             surname: teamManager.surname
+                                             surname: teamManager.surname,
+                                              wallet: teamManager.wallet
     )
   end
 end

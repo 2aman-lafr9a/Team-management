@@ -1,0 +1,136 @@
+syntax = "proto3";
+option go_package = "./proto";
+
+package offer;
+
+option java_outer_classname = "OfferOuterClass";
+option java_package = "org.example.apigateway.grpc.offer";
+
+
+service Offer {
+  rpc GetOffers(GetOffersRequest) returns (GetOffersResponse);
+  rpc GetOffer(GetOfferRequest) returns (GetOfferResponse);
+  rpc CreateOffer(CreateOfferRequest) returns (CreateOfferResponse);
+  rpc UpdateOffer(UpdateOfferRequest) returns (UpdateOfferResponse);
+  rpc DeleteOffer(DeleteOfferRequest) returns (DeleteOfferResponse);
+  rpc GetOfferById(GetOfferIdRequest) returns (GetOfferIdResponse);
+}
+
+enum  OfferType {
+  Normal = 0;
+  Special = 1;
+  Important = 2;
+  ultimate = 3;
+}
+
+message OfferItem{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
+
+message GetOffersRequest{
+}
+
+message GetOffersResponse{
+  repeated OfferItem offers = 1;
+}
+
+message GetOfferRequest{
+  string name = 1;
+}
+
+message GetOfferResponse{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
+
+message CreateOfferRequest{
+  string name = 1;
+  string agencyID = 2;
+  string description = 3;
+  int32 price = 4;
+  string date = 5;
+  OfferType type = 6;
+}
+
+message CreateOfferResponse{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  OfferType type = 7;
+}
+
+message UpdateOfferRequest{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
+
+message UpdateOfferResponse{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
+
+message DeleteOfferRequest{
+  string id = 1;
+}
+
+message DeleteOfferResponse{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
+
+message AgencyItem{
+  string id = 1;
+  string name = 2;
+  string plan = 3;
+  repeated offer.OfferItem offers = 4;
+  string description = 5;
+}
+
+message GetOfferIdRequest{
+  string id = 1;
+}
+
+message GetOfferIdResponse{
+  string id = 1;
+  string name = 2;
+  AgencyItem agency = 3;
+  string description = 4;
+  int32 price = 5;
+  string date = 6;
+  int32 rating = 7;
+  OfferType type = 8;
+}
