@@ -4,6 +4,7 @@ require 'grpc'
 require_relative 'utils/dbMigration'
 require_relative 'player_services_pb'
 require 'rubygems'
+require_relative 'models/player_model'
 require_relative 'services/PlayerService'
 
 class PlayerServer
