@@ -15,4 +15,4 @@ RUN bundle install
 RUN bundle exec rake build
 
 # Specify the command to run on container start
-CMD ["ruby", "lib/main.rs"]
+CMD ["ruby", "lib/main.rb"]
