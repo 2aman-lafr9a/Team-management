@@ -2,7 +2,7 @@
 # Source: offer.proto for package 'offer'
 
 require 'grpc'
-require 'offer_pb'
+require_relative 'offer_pb'
 
 module Offer
   module Offer
