@@ -7,7 +7,8 @@ ActiveRecord::Base.establish_connection(
   host: ENV['DB_HOST'] || 'localhost',
   username: ENV['DB_USERNAME'] || 'root',
   password: ENV['DB_PASSWORD'] || 'password',
-  database: ENV['DB_NAME'] || 'team_management'
+  database: ENV['DB_NAME'] || 'team_management',
+  pool: 20
 )
 
 class Create < ActiveRecord::Migration[6.0]

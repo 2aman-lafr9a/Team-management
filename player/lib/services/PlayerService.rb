@@ -59,7 +59,7 @@ class PlayerService < Player::Player::Service
 
   def get_player(get_player_request, _unused_call)
     @player = PlayerModel.new
-    @player = PlayerModel.find(get_player_request.id)
+    @player = PlayerModel.find_by(name: get_player_request.id)
     return Player::GetPlayerResponse.new(id: 'Player not found') if @player.nil?
     Player::GetPlayerResponse.new(player: player_to_proto(@player))
   end
