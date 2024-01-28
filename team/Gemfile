@@ -9,7 +9,7 @@ gem "rake", "~> 13.0"
 
 gem "minitest", "~> 5.16"
 
-gem "grpc", "~> 1.46.2"
+gem "grpc", "~> 1.32"
 
 gem "rubocop", group: "development", require: false
 
