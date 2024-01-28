@@ -28,6 +28,8 @@ services:
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
     container_name: team_service
+    networks:
+      - aman_network
   player_service:
     build:
       context: ./player
@@ -42,6 +44,8 @@ services:
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
     container_name: player_service
+    networks:
+      - aman_network
   team_manager_service:
     build:
       context: ./team_manager
@@ -58,5 +62,11 @@ services:
       DB_USERNAME: team_management
       DB_PASSWORD: team_management
     container_name: team_manager_service
+    networks:
+      - aman_network
+networks:
+  aman_network:
+    driver: bridge
+    external: true
 volumes:
   team_management_volume:
