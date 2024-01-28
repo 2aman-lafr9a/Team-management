@@ -1,19 +1,18 @@
+# Dockerfile.rails
 FROM ruby:3.0
-
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
-
-
 
 # Set the working directory in the container
 WORKDIR /app
 
 
-COPY Gemfile Gemfile.lock ./
+# Copy the application code into the container
+COPY . ./
+
+# Install dependencies
 RUN bundle install
 
-COPY . .
-
+# Build the ruby app
+RUN bundle exec rake build
 
 # Specify the command to run on container start
-CMD ["./lib/main.rb"]
+CMD ["ruby", "lib/main.rb"]
