@@ -5,6 +5,7 @@ require_relative '../models/player_model'
 require_relative '../player_services_pb'
 require_relative '../utils/dbMigration'
 require_relative '../offer_services_pb'
+require 'kafka'
 
 class PlayerService < Player::Player::Service
   def create_player(create_player_request, _unused_call)
@@ -116,6 +117,48 @@ class PlayerService < Player::Player::Service
     stub = Offer::Offer::Stub.new('localhost:50002', :this_channel_is_insecure)
     @offer = stub.get_offer(Offer::GetOfferIdRequest.new(id: get_offers_by_player_request.player_id))
     Offer::GetOffersByPlayerResponse.new(offer: @offer)
+  end
+
+  def get_recommended_offer(get_recommended_offer_request, _unused_call)
+    config = Kafka::Config.new("bootstrap.servers": 'localhost:9092')
+    producer = Kafka::Producer.new(config)
+
+    @player = PlayerModel.find(get_recommended_offer_request.id)
+
+    event = Kafka::Event.new(
+      topic: 'user_interaction',
+      payload: {
+        id: @player.id,
+        name: @player.name,
+        age: @player.age,
+        overall: @player.overall,
+        value: @player.value
+      }
+    )
+
+    result = producer.produce(event, event.to_json)
+
+    consumer = Kafka::Consumer.new(config)
+    consumer.subscribe('recommendations_topic')
+
+    @run = true
+    trap('INT') { @run = false }
+    trap('TERM') { @run = false }
+
+    while @run
+      consumer.poll do |message|
+        Offer::OfferItem.new(id: message.payload['id'],
+                             name: message.payload['name'],
+                             agency: message.payload['agency'],
+                             description: message.payload['description'],
+                             price: message.payload['price'],
+                             date: message.payload['date'],
+                             rating: message.payload['rating'],
+                             type: message.payload['type'])
+      end
+    end
+
+
   end
 
   private

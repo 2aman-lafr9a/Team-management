@@ -9,7 +9,7 @@ gem 'rake', '~> 13.0'
 
 gem 'minitest', '~> 5.16'
 
-gem "grpc", "~> 1.32"
+gem 'grpc', '~> 1.32'
 
 gem 'rubocop', group: 'development', require: false
 
@@ -20,3 +20,5 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'test-unit', '~> 3.3', '>= 3.3.5'
 
 gem 'grpc-tools', '~> 1.32'
+
+gem 'kafka', '~> 0.5.2'

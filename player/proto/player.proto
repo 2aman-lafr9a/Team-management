@@ -15,6 +15,7 @@ service Player{
     rpc DeletePlayer(DeletePlayerRequest) returns (DeletePlayerResponse) {}
     rpc GetPlayers(GetPlayersRequest) returns (GetPlayersResponse) {}
     rpc GetOffersByPlayer(GetOffersByPlayerRequest) returns (GetOffersByPlayerResponse) {}
+    rpc GetRecommendedOffer(GetPlayerRequest) returns (offer.OfferItem) {}
 }
 
 message GetPlayerRequest {

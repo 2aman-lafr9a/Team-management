@@ -20,6 +20,7 @@ GEM
       zeitwerk (~> 2.3)
     ast (2.4.2)
     concurrent-ruby (1.2.2)
+    ffi (1.16.3)
     google-protobuf (3.25.2)
     google-protobuf (3.25.2-aarch64-linux)
     google-protobuf (3.25.2-arm64-darwin)
@@ -50,7 +51,11 @@ GEM
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     json (2.7.1)
+    kafka (0.5.2)
+      ffi
+      mini_portile2
     language_server-protocol (3.17.0.3)
+    mini_portile2 (2.8.5)
     minitest (5.21.1)
     mysql2 (0.5.5)
     parallel (1.24.0)
@@ -97,6 +102,7 @@ DEPENDENCIES
   activerecord (~> 6.1.4)
   grpc (~> 1.32)
   grpc-tools (~> 1.32)
+  kafka (~> 0.5.2)
   minitest (~> 5.16)
   mysql2 (>= 0.4.4, < 0.6.0)
   rake (~> 13.0)

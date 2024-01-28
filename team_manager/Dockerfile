@@ -1,5 +1,5 @@
 # Dockerfile.rails
-FROM amd64/ruby:latest AS rails-toolbox
+FROM ruby:3.3.0 AS rails-toolbox
 
 # Set the working directory in the container
 WORKDIR /app
