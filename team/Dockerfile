@@ -1,17 +1,19 @@
-# Dockerfile.rails
-FROM amd64/ruby:latest AS rails-toolbox
+FROM ruby:3.0
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
+
+
+
 # Set the working directory in the container
 WORKDIR /app
 
 
-# Copy the application code into the container
-COPY . ./
-
-# Install dependencies
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# Build the ruby app
-RUN bundle exec rake build
+COPY . .
+
 
 # Specify the command to run on container start
-CMD ["ruby", "lib/main.rb"]
+CMD ["./lib/main.rb"]
