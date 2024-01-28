@@ -2,7 +2,7 @@
 # Source: team.proto for package 'team'
 
 require 'grpc'
-require 'team_pb'
+require_relative 'team_pb'
 
 module Team
   module Team

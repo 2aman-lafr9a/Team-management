@@ -2,7 +2,7 @@
 # Source: player.proto for package 'player'
 
 require 'grpc'
-require 'player_pb'
+require_relative 'player_pb'
 
 module Player
   module Player
